@@ -1,0 +1,36 @@
+{
+  "name": "react-ssr-starter",
+  "version": "0.1.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "rm -rdf ./dist && node scripts/webpack",
+    "clean": "rm -rdf ./dist",
+    "build": "NODE_ENV=production node scripts/webpack",
+    "start": "NODE_ENV=production node dist/server/server.js"
+  },
+  "dependencies": {
+    "koa": "^2.6.2",
+    "koa-static": "^5.0.0",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-helmet": "^5.2.0",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "source-map-support": "^0.5.9"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "start-server-webpack-plugin": "^2.2.5",
+    "webpack": "^4.27.1",
+    "webpack-dev-server": "^3.1.10",
+    "webpack-manifest-plugin": "^2.0.4",
+    "webpack-merge": "^4.1.5",
+    "webpack-node-externals": "^1.7.2",
+    "webpackbar": "^3.1.4"
+  }
+}
