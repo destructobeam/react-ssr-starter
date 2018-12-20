@@ -7,7 +7,7 @@
     "dev": "rm -rdf ./dist && node scripts/webpack",
     "clean": "rm -rdf ./dist",
     "build": "NODE_ENV=production node scripts/webpack",
-    "start": "NODE_ENV=production node dist/server/server.js"
+    "start": "NODE_ENV=production node dist/server.js"
   },
   "dependencies": {
     "koa": "^2.6.2",

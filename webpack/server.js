@@ -12,7 +12,7 @@ let config = {
   name: 'server',
   target: 'node',
   output: {
-    path: path.resolve(__dirname, '..', 'dist', 'server'),
+    path: path.resolve(__dirname, '..', 'dist'),
     filename: 'server.js',
   },
   module: {
@@ -57,8 +57,8 @@ if (dev) {
     devtool: 'source-map',
     watch: true,
     plugins: [
-      new WebpackBar({ name: 'Server', color: 'blue' }),
       new webpack.HotModuleReplacementPlugin(),
+      new WebpackBar({ name: 'Server', color: 'blue' }),
       new StartServerPlugin({
         name: 'server.js',
         // nodeArgs: ['-r source-map-support/register'],
