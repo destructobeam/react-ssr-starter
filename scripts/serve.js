@@ -1,10 +1,18 @@
 const http = require('http');
-const app = require('../src/server').default;
+const https = require('https');
 
+const app = require('../src/server').default;
+const dev = process.env.NODE_ENV !== 'production';
 const port = process.env.PORT || 3000;
 
 let handler = app.callback();
-const server = http.createServer(handler);
+let server;
+
+if (dev) {
+  server = http.createServer(handler);
+} else {
+  server = https.createServer(handler);
+}
 
 server.listen(port, error => {
   if (error) {

@@ -1,17 +1,32 @@
 const render = async (context, next) => {
-  console.log('Render called');
+  await next();
+
+  console.log('Render up');
+
+  const {
+    state: {
+      assetManifest,
+      chunkExtractor,
+      helmet: { bodyAttributes, htmlAttributes, link, meta, title },
+      reactString,
+    },
+  } = context;
 
   context.body = `
-    <html>
+    <!doctype html>
+    <html ${htmlAttributes.toString()}>
     <head>
       <title>SSR Starter</title>
+      ${title.toString()}
+      ${meta.toString()}
+      ${link.toString()}
     </head>
-    <body>
-      <div id="main" role="main">${context.state.reactString}</div>
-      <script src="${context.state.assetManifest["bundle.js"]}"></script>
+    <body ${bodyAttributes.toString()}>
+      <div id="main" role="main">${reactString}</div>
+      ${chunkExtractor.getScriptTags()}
     </body>
     </html>
-  `
+  `;
 };
 
 export default render;

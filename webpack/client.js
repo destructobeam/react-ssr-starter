@@ -3,17 +3,19 @@ const merge = require('webpack-merge');
 
 const dev = process.env.NODE_ENV !== 'production';
 
-const webpack = require('webpack');
-const Manifest = require('webpack-manifest-plugin');
+const { HotModuleReplacementPlugin } = require('webpack');
+const LoadablePlugin = require('@loadable/webpack-plugin');
 const WebpackBar = require('webpackbar');
 
 let config = {
   name: 'client',
+
   output: {
     path: path.resolve(__dirname, '..', 'public', 'assets'),
     publicPath: 'http://localhost:3001/assets/',
     filename: '[name].[hash].js',
   },
+
   module: {
     rules: [
       {
@@ -32,20 +34,33 @@ let config = {
               ],
               '@babel/preset-react',
             ],
-            plugins: ['@babel/plugin-syntax-dynamic-import'],
+            plugins: [
+              '@babel/plugin-syntax-dynamic-import',
+              '@loadable/babel-plugin',
+              'babel-plugin-emotion',
+            ],
           },
         },
       },
     ],
   },
+
+  plugins: [
+    new LoadablePlugin({
+      writeToDisk: true,
+    }),
+  ],
+
 };
 
 if (dev) {
   config = merge(config, {
     mode: 'development',
+
     entry: {
-      bundle: ['webpack/hot/signal', './src/client.js'],
+      main: ['webpack/hot/signal', './src/client.js'],
     },
+
     devtool: 'source-map',
     devServer: {
       hot: true,
@@ -54,12 +69,9 @@ if (dev) {
       publicPath: 'http://localhost:3001/assets/',
       port: 3001,
     },
+
     plugins: [
-      new Manifest({
-        publicPath: 'http://localhost:3001/assets/',
-        writeToFileEmit: true,
-      }),
-      new webpack.HotModuleReplacementPlugin(),
+      new HotModuleReplacementPlugin(),
       new WebpackBar({ name: 'Client', color: 'green' }),
     ],
   });
@@ -67,7 +79,7 @@ if (dev) {
   config = merge(config, {
     mode: 'production',
     entry: {
-      bundle: './src/client.js',
+      main: './src/client.js',
     },
   });
 }

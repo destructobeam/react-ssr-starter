@@ -4,6 +4,7 @@ const merge = require('webpack-merge');
 
 const dev = process.env.NODE_ENV !== 'production';
 
+const { HotModuleReplacementPlugin } = require('webpack');
 const NodeExternals = require('webpack-node-externals');
 const StartServerPlugin = require('start-server-webpack-plugin');
 const WebpackBar = require('webpackbar');
@@ -11,10 +12,12 @@ const WebpackBar = require('webpackbar');
 let config = {
   name: 'server',
   target: 'node',
+
   output: {
     path: path.resolve(__dirname, '..', 'dist'),
     filename: 'server.js',
   },
+
   module: {
     rules: [
       {
@@ -35,12 +38,17 @@ let config = {
               ],
               '@babel/preset-react',
             ],
-            plugins: ['@babel/plugin-syntax-dynamic-import'],
+            plugins: [
+              '@babel/plugin-syntax-dynamic-import',
+              '@loadable/babel-plugin',
+              'babel-plugin-emotion',
+            ],
           },
         },
       },
     ],
   },
+
   externals: [
     NodeExternals({
       whitelist: ['webpack/hot/signal'],
@@ -57,7 +65,7 @@ if (dev) {
     devtool: 'source-map',
     watch: true,
     plugins: [
-      new webpack.HotModuleReplacementPlugin(),
+      new HotModuleReplacementPlugin(),
       new WebpackBar({ name: 'Server', color: 'blue' }),
       new StartServerPlugin({
         name: 'server.js',

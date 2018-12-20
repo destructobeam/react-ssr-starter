@@ -1,5 +1,16 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 
-const App = () => <h1>SSR Starter</h1>;
+const App = () => (
+  <>
+    <Helmet>
+      <html lang="en" />
+      <meta charSet="utf-8" />
+      <title>React SSR Starter</title>
+    </Helmet>
+
+    <h1>React SSR Starter</h1>
+  </>
+);
 
 export default App;
