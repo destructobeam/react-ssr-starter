@@ -17,7 +17,6 @@ series of steps required to render your application on the server.
 
 ## TODO
 
-- Fix client hot-reloading
 - Add React Router middleware
 - Check React Router's status code and apply to Koa
 - Add in Emotion CSS-in-JS

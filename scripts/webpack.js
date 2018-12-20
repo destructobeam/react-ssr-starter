@@ -29,10 +29,11 @@ const logCompilerErrors = (error, stats) => {
 if (dev) {
   const hotOptions = {
     contentBase: './public',
+    publicPath: 'http://localhost:3001/',
     hot: true,
     host: 'localhost',
     port: 3001,
-  }
+  };
 
   const devServerOptions = {
     ...clientConfig.devServer,

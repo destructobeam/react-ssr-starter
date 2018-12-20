@@ -44,15 +44,13 @@ if (dev) {
   config = merge(config, {
     mode: 'development',
     entry: {
-      bundle: [
-        'webpack/hot/poll?1000',
-        './src/client.js',
-      ]
+      bundle: ['webpack/hot/signal', './src/client.js'],
     },
     devtool: 'source-map',
     devServer: {
       hot: true,
-      headers:  {"Access-Control-Allow-Origin": "*"},
+      headers: { 'Access-Control-Allow-Origin': '*' },
+      contentBase: path.resolve('..', 'public', 'assets'),
       publicPath: 'http://localhost:3001/assets/',
       port: 3001,
     },
@@ -70,7 +68,7 @@ if (dev) {
     mode: 'production',
     entry: {
       bundle: './src/client.js',
-    }
+    },
   });
 }
 
