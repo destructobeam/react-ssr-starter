@@ -4,10 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "rm -rdf ./dist && node scripts/webpack",
+    "dev": "rm -rdf ./dist && node scripts/webpack.js",
     "clean": "rm -rdf ./dist",
-    "build": "NODE_ENV=production node scripts/webpack",
-    "start": "NODE_ENV=production node dist/server.js"
+    "build": "node scripts/webpack.js",
+    "start": "node dist/server.js",
+    "test": "NODE_ENV=test jest"
   },
   "dependencies": {
     "@loadable/component": "^5.2.2",
@@ -32,6 +33,11 @@
     "@loadable/webpack-plugin": "^5.2.2",
     "babel-loader": "^8.0.4",
     "babel-plugin-emotion": "^10.0.5",
+    "compression-webpack-plugin": "^2.0.0",
+    "jest": "^23.6.0",
+    "jest-emotion": "^10.0.5",
+    "react-test-renderer": "^16.7.0",
+    "size-plugin": "^1.1.1",
     "start-server-webpack-plugin": "^2.2.5",
     "webpack": "^4.27.1",
     "webpack-dev-server": "^3.1.10",

@@ -3,12 +3,13 @@ const https = require('https');
 
 const app = require('../src/server').default;
 const dev = process.env.NODE_ENV !== 'production';
+const ssl = process.env.PROTOCOL || 'http';
 const port = process.env.PORT || 3000;
 
 let handler = app.callback();
 let server;
 
-if (dev) {
+if (ssl) {
   server = http.createServer(handler);
 } else {
   server = https.createServer(handler);
@@ -19,7 +20,7 @@ server.listen(port, error => {
     console.log(error);
   }
 
-  console.log('Server started');
+  console.log('Server started on port ', port);
 });
 
 if (module.hot) {

@@ -20,10 +20,11 @@ const render = async (context, next) => {
       ${title.toString()}
       ${meta.toString()}
       ${link.toString()}
+
+      ${chunkExtractor.getScriptTags()}
     </head>
     <body ${bodyAttributes.toString()}>
       <div id="main" role="main">${reactString}</div>
-      ${chunkExtractor.getScriptTags()}
     </body>
     </html>
   `;

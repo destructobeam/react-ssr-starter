@@ -18,6 +18,8 @@ let config = {
     filename: 'server.js',
   },
 
+  devtool: 'source-map',
+
   module: {
     rules: [
       {
@@ -38,6 +40,7 @@ let config = {
               ],
               '@babel/preset-react',
             ],
+
             plugins: [
               '@babel/plugin-syntax-dynamic-import',
               '@loadable/babel-plugin',
@@ -58,12 +61,14 @@ let config = {
 
 if (dev) {
   config = merge(config, {
+    mode: 'development',
+
     entry: {
       server: ['webpack/hot/signal', './scripts/serve.js'],
     },
-    mode: 'development',
-    devtool: 'source-map',
+
     watch: true,
+
     plugins: [
       new HotModuleReplacementPlugin(),
       new WebpackBar({ name: 'Server', color: 'blue' }),
@@ -78,8 +83,13 @@ if (dev) {
 } else {
   config = merge(config, {
     mode: 'production',
+
     entry: {
       server: './scripts/serve.js',
+    },
+
+    optimization: {
+      minimize: false,
     },
   });
 }

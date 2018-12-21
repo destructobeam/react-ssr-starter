@@ -16,7 +16,7 @@ const server = new Koa();
 
 if (!dev) {
   // Use webpack-dev-server in dev mode, otherwise serve static assets normally
-  server.use(KoaStatic(path.resolve('..', 'public')));
+  server.use(KoaStatic(path.resolve('public')));
 }
 
 // Load asset manifest in to state and watch changes to manifest in development
