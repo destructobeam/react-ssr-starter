@@ -21,6 +21,7 @@ const render = async (context, next) => {
       ${meta.toString()}
       ${link.toString()}
 
+      ${chunkExtractor.getLinkTags()}
       ${chunkExtractor.getScriptTags()}
     </head>
     <body ${bodyAttributes.toString()}>
