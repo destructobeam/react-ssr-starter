@@ -12,6 +12,11 @@ const WebpackBar = require('webpackbar');
 let config = {
   name: 'client',
 
+  output: {
+    path: path.resolve(__dirname, '..', 'public', 'assets'),
+    filename: '[name].[hash].js',
+  },
+
   module: {
     rules: [
       {
@@ -51,6 +56,7 @@ let config = {
 };
 
 if (dev) {
+  // Development only settings
   config = merge(config, {
     mode: 'development',
 
@@ -59,16 +65,14 @@ if (dev) {
     },
 
     output: {
-      path: path.resolve(__dirname, '..', 'public', 'assets'),
       publicPath: 'http://localhost:3001/assets/',
-      filename: '[name].[hash].js',
     },
 
     devtool: 'source-map',
     devServer: {
       hot: true,
-      headers: { 'Access-Control-Allow-Origin': '*' },
       contentBase: path.resolve('..', 'public', 'assets'),
+      headers: { 'Access-Control-Allow-Origin': '*' },
       publicPath: 'http://localhost:3001/assets/',
       port: 3001,
       quiet: true,
@@ -80,6 +84,7 @@ if (dev) {
     ],
   });
 } else {
+  // Production only settings
   config = merge(config, {
     mode: 'production',
 
@@ -88,9 +93,7 @@ if (dev) {
     },
 
     output: {
-      path: path.resolve(__dirname, '..', 'public', 'assets'),
       publicPath: '/assets/',
-      filename: '[name].[hash].js',
     },
 
     plugins: [new CompressionPlugin()],
