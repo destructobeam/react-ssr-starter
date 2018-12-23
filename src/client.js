@@ -12,8 +12,8 @@ const Client = () => (
 );
 
 loadableReady(() => {
-  hydrate(<App />, document.getElementById('main'));
-})
+  hydrate(<Client />, document.getElementById('main'));
+});
 
 if (module.hot) {
   module.hot.accept();
