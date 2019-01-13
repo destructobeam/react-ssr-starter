@@ -3,8 +3,8 @@ const merge = require('webpack-merge');
 
 const dev = process.env.NODE_ENV !== 'production';
 
+const { DefinePlugin, HotModuleReplacementPlugin } = require('webpack');
 const CompressionPlugin = require('compression-webpack-plugin');
-const { HotModuleReplacementPlugin } = require('webpack');
 const LoadablePlugin = require('@loadable/webpack-plugin');
 const SizePlugin = require('size-plugin');
 const WebpackBar = require('webpackbar');
@@ -48,6 +48,9 @@ let config = {
   },
 
   plugins: [
+    new DefinePlugin({
+      'typeof window': JSON.stringify('object'),
+    }),
     new LoadablePlugin({
       writeToDisk: true,
     }),

@@ -1,10 +1,11 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
+const Dotenv = require('dotenv-webpack');
 
 const dev = process.env.NODE_ENV !== 'production';
 
-const { HotModuleReplacementPlugin } = require('webpack');
+const { DefinePlugin, HotModuleReplacementPlugin } = require('webpack');
 const NodeExternals = require('webpack-node-externals');
 const StartServerPlugin = require('start-server-webpack-plugin');
 const WebpackBar = require('webpackbar');
@@ -14,7 +15,7 @@ let config = {
   target: 'node',
 
   output: {
-    path: path.resolve(__dirname, '..', 'dist'),
+    path: path.resolve(__dirname, '..', 'build'),
     filename: 'server.js',
   },
 
@@ -57,6 +58,12 @@ let config = {
       whitelist: ['webpack/hot/signal'],
     }),
   ],
+
+  plugins: [
+    new DefinePlugin({
+      'typeof window': JSON.stringify(null),
+    }),
+  ],
 };
 
 if (dev) {
@@ -70,6 +77,7 @@ if (dev) {
     watch: true,
 
     plugins: [
+      new Dotenv(),
       new HotModuleReplacementPlugin(),
       new WebpackBar({ name: 'Server', color: 'blue' }),
       new StartServerPlugin({

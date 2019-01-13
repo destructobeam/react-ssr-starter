@@ -4,10 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "rm -rdf ./dist && node scripts/webpack.js",
-    "clean": "rm -rdf ./dist",
+    "dev": "node scripts/webpack.js",
+    "clean": "rm -rdf ./build/* && rm -rdf ./public/assets/*",
     "build": "node scripts/webpack.js",
-    "start": "node dist/server.js",
+    "start": "node build/server.js",
     "test": "NODE_ENV=test jest"
   },
   "dependencies": {
