@@ -14,7 +14,7 @@ Includes Webpack hot reloading for server and client apps.
 
 ## Server
 
-Uses the beautiful nature of Koa's async function middleware to encapsulate the
+Uses the wonderful nature of Koa's async function middleware to encapsulate the
 series of steps required to render your application on the server.
 
 ## Notes
@@ -27,6 +27,7 @@ GraphQL should be fetched on server by something like ApolloClient.
 
 ## TODO
 
+- External asset webpack plugins
 - Figure out and implement client only code splitting for when you need super fast TTI, and don't care about overly complex auxiliary interfaces being rendered on the server and included in the initially loaded bundle.
 - Possibly use streaming response on server
 - Testing setup
