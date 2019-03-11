@@ -8,17 +8,12 @@ import App from '../app';
 const react = async (context, next) => {
   console.log('React down');
 
-  const {
-    state: { chunkExtractor, reactRouterContext },
-    url,
-  } = context;
-
   context.state.reactString = renderToString(
-    <ChunkExtractorManager>
-      <Router context={reactRouterContext} location={url}>
+    <ChunkExtractorManager extractor={context.state.chunkExtractor}>
+      <Router context={context.state.reactRouterContext} location={context.url}>
         <App />
       </Router>
-    </ChunkExtractorManager>,
+    </ChunkExtractorManager>
   );
 
   await next();
