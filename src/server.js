@@ -7,9 +7,9 @@ import KoaStatic from 'koa-static';
 import bootstrap from './server/bootstrap';
 import browserslist from './server/browserslist';
 // import emotion from './server/emotion';
-import errors from './server/errors';
+// import errors from './server/errors';
 import loadable from './server/loadable';
-import prepass from './server/prepass';
+// import prepass from './server/prepass';
 import react from './server/react';
 // import redirect from './server/redirect';
 import render from './server/render';
@@ -42,11 +42,11 @@ server.use(render);
 // Check router status code and redirect if needed
 // server.use(redirect);
 
-// Create React app string
-server.use(react);
-
 // Set up chunk extractor
 server.use(loadable);
+
+// Create React app string
+server.use(react);
 
 // Prepass React render
 // server.use(prepass);

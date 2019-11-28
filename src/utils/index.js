@@ -1,5 +1,4 @@
-export { Suspense } from './lazy';
-export { lazy } from '@loadable/component';
+export { lazy, Suspense } from './lazy';
 
 export const noop = () => {};
 

@@ -14,7 +14,7 @@ const base_options = {
   contentBase: './public',
   hot: true,
   host: 'localhost',
-  quiet: true,
+  // quiet: true,
   writeToDisk: filename => filename.includes('.json'),
 };
 
@@ -40,36 +40,39 @@ const legacy_options = {
 // .quiet(true)
 // .end()
 
-WebpackDevServer.addDevServerEntrypoints(client_modern_config, modern_options);
-WebpackDevServer.addDevServerEntrypoints(client_legacy_config, legacy_options);
+// WebpackDevServer.addDevServerEntrypoints(client_modern_config, modern_options);
+// WebpackDevServer.addDevServerEntrypoints(client_legacy_config, legacy_options);
 
 const client_modern_compiler = Webpack(
-  client_modern_config,
-  log_compiler_errors
+  client_modern_config
+  // log_compiler_errors
 );
 
 const client_legacy_compiler = Webpack(
-  client_legacy_config,
-  log_compiler_errors
+  client_legacy_config
+  // log_compiler_errors
 );
 
-const modern_dev_server = new WebpackDevServer(
-  client_modern_compiler,
-  modern_options
-);
-const legacy_dev_server = new WebpackDevServer(
-  client_legacy_compiler,
-  legacy_options
-);
+client_modern_compiler.watch({}, log_compiler_errors);
+client_legacy_compiler.watch({}, log_compiler_errors);
 
-modern_dev_server.listen(modern_options.port, BIND_ADDRESS, () => {
-  console.log(
-    `Starting server on http://${BIND_ADDRESS}:${modern_options.port}`
-  );
-});
+// const modern_dev_server = new WebpackDevServer(
+//   client_modern_compiler,
+//   modern_options
+// );
+// const legacy_dev_server = new WebpackDevServer(
+//   client_legacy_compiler,
+//   legacy_options
+// );
 
-legacy_dev_server.listen(legacy_options.port, BIND_ADDRESS, () => {
-  console.log(
-    `Starting server on http://${BIND_ADDRESS}:${legacy_options.port}`
-  );
-});
+// modern_dev_server.listen(modern_options.port, BIND_ADDRESS, () => {
+//   console.log(
+//     `Starting server on http://${BIND_ADDRESS}:${modern_options.port}`
+//   );
+// });
+
+// legacy_dev_server.listen(legacy_options.port, BIND_ADDRESS, () => {
+//   console.log(
+//     `Starting server on http://${BIND_ADDRESS}:${legacy_options.port}`
+//   );
+// });

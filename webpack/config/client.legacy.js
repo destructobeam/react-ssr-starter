@@ -5,17 +5,13 @@ const COMMON = require('./common');
 
 const ASSETS_PATH = path.resolve('public', 'assets');
 const IS_DEV = process.env.NODE_ENV !== 'production';
-const PUBLIC_PATH = '/assets/';
+const PUBLIC_PATH = IS_DEV ? `http://localhost:3002/assets/` : '/assets/';
 
 const config = new WebpackChain();
 
 config
   .merge(COMMON)
   .name('client.legacy')
-
-  .entry('client.legacy')
-  .add('./src/client.js')
-  .end()
 
   .output.path(ASSETS_PATH)
   .publicPath(PUBLIC_PATH)
@@ -32,8 +28,8 @@ config.module
   .options({
     presets: ['@babel/preset-env', '@babel/preset-react'],
     plugins: [
-      '@babel/plugin-syntax-dynamic-import',
       '@loadable/babel-plugin',
+      // '@babel/plugin-syntax-dynamic-import',
       'babel-plugin-emotion',
     ],
   });
@@ -62,17 +58,47 @@ config
   ])
   .end();
 
-config.when(IS_DEV, config => {
-  config
-    // .entry('graphiql')
-    // .add('src/graphiql')
-    // .end()
+config.when(
+  IS_DEV,
+  config => {
+    const { WebpackPluginServe: Serve } = require('webpack-plugin-serve');
+    const middleware = require('./middleware');
 
-    .devtool('source-map')
+    config
+      .entry('client')
+      // .add('webpack/hot/signal')
+      .add('webpack-plugin-serve/client')
+      .add('./src/client.js')
+      .end()
 
-    .plugin('hot')
-    .use(require.resolve('webpack/lib/HotModuleReplacementPlugin'))
-    .end();
-});
+      // .entry('graphiql')
+      // .add('src/graphiql')
+      // .end()
+
+      // .watch(true)
+      .devtool('source-map')
+
+      .plugin('serve')
+      .use(Serve, [
+        {
+          port: 3002,
+          allowMany: true,
+          static: path.resolve('public'),
+          middleware,
+        },
+      ]);
+
+    // .plugin('hot')
+    // .use(require.resolve('webpack/lib/HotModuleReplacementPlugin'))
+    // .end();
+  },
+
+  config => {
+    config
+      .entry('client')
+      .add('./src/client.js')
+      .end();
+  }
+);
 
 module.exports = config.toConfig();

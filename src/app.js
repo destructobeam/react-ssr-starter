@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { lazy, Suspense } from 'utils';
+import { lazy as loadable } from '@loadable/component';
 
-const Text = lazy(() => import('components/text'));
+const Text = loadable(() => import('components/text'));
 
 const App = () => (
   <>
