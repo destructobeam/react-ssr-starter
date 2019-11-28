@@ -29,6 +29,8 @@ config
 config.module
   .rule('react')
   .test(/\.js$/)
+  .exclude.add(/node_modules/)
+  .end()
 
   .use('babel')
   .loader('babel-loader')
@@ -47,8 +49,8 @@ config.module
     ],
 
     plugins: [
-      '@babel/plugin-syntax-dynamic-import',
       '@loadable/babel-plugin',
+      '@babel/plugin-syntax-dynamic-import',
       'babel-plugin-emotion',
     ],
   });
@@ -74,6 +76,12 @@ config
     },
   ])
   .end()
+
+  // .plugin('loadable-stats')
+  // .use(require.resolve('@loadable/webpack-plugin'), [
+  //   { filename: 'server-stats.json', writeToDisk: true },
+  // ])
+  // .end()
 
   .plugin('webpack-bar')
   .use(require.resolve('webpackbar'), [{ name: 'Server', color: 'yellow' }])
