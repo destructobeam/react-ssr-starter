@@ -1,14 +1,16 @@
-import fs from 'fs';
-import path from 'path';
-
-const dev = process.env.NODE_ENV !== 'production';
-
 const bootstrap = async (context, next) => {
-  console.log('Bootstrap down');
+  context.logger.info('Bootstrap response for', context.url);
+
+  if (context.url === '/favicon.ico') {
+    context.logger.info('Requested favicon');
+
+    context.status = 404;
+    context.body = '';
+
+    return;
+  }
 
   await next();
-
-  console.log('Bootstrap up');
 };
 
 export default bootstrap;

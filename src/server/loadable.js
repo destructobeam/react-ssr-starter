@@ -1,17 +1,35 @@
-import fs from 'fs';
 import path from 'path';
 import { ChunkExtractor } from '@loadable/server';
 
+const modern_stats_file = path.resolve(
+  'public',
+  'assets',
+  'client-modern-stats.json'
+);
+const legacy_stats_file = path.resolve(
+  'public',
+  'assets',
+  'client-legacy-stats.json'
+);
+
 const loadable = async (context, next) => {
-  console.log('Loadable down');
+  context.logger.info('Loadable down');
 
-  const statsFile = path.resolve('public', 'assets', 'loadable-stats.json');
-
-  context.state.chunkExtractor = new ChunkExtractor({ statsFile });
+  if (context.state.modern_browser) {
+    context.state.chunk_extractor = new ChunkExtractor({
+      statsFile: modern_stats_file,
+      entrypoints: ['client.modern'],
+    });
+  } else {
+    context.state.chunk_extractor = new ChunkExtractor({
+      statsFile: legacy_stats_file,
+      entrypoints: ['client.legacy'],
+    });
+  }
 
   await next();
 
-  console.log('Loadable up');
+  context.logger.info('Loadable up');
 };
 
 export default loadable;

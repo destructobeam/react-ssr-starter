@@ -1,18 +1,11 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { createRoot } from 'react-dom';
 import { loadableReady } from '@loadable/component';
-import { hydrate } from 'react-dom';
 
 import App from './app';
 
-const Client = () => (
-  <Router>
-    <App />
-  </Router>
-);
-
 loadableReady(() => {
-  hydrate(<Client />, document.getElementById('main'));
+  createRoot(document.getElementById('main')).hydrate(<App />);
 });
 
 if (module.hot) {

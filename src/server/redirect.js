@@ -1,20 +1,16 @@
 const redirect = async (context, next) => {
-  console.log('Redirect down');
+  context.logger.info('Redirect down');
 
-  if (context.originalUrl === '/favicon.ico') {
-    context.status = 404;
-    context.body = '';
-  }
-
-  context.state.reactRouterContext = {};
+  context.state.router_context = {};
 
   await next();
 
-  console.log('Redirect up', context.state.reactRouterContext);
-
-  if (context.state.reactRouterContext.url) {
-    context.redirect(context.state.reactRouterContext.url);
+  if (context.state.router_context.url) {
+    context.status = 301;
+    context.redirect(context.state.router_context.url);
   }
+
+  context.logger.info('Redirect up');
 };
 
 export default redirect;
