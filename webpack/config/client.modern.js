@@ -98,7 +98,9 @@ config.when(
       .optimization.minimize(true)
       .minimizer('js')
       .use(
-        require.resolve('terser-webpack-plugin', [{ ecma: 8, safari10: true }])
+        require.resolve('terser-webpack-plugin', [
+          { terserOptions: { ecma: 8, safari10: true } },
+        ])
       );
   }
 );
