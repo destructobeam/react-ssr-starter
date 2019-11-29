@@ -1,3 +1,6 @@
+// Concurrent mode server hydrate example:
+// https://codesandbox.io/embed/floral-worker-xwbwv?codemirror=1
+
 import React from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { hydrate } from 'react-dom';
