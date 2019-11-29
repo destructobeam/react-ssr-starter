@@ -97,7 +97,11 @@ config.when(
     config
       .entry('client')
       .add('./src/client.js')
-      .end();
+      .end()
+
+      .optimization.minimize(true)
+      .minimizer('js')
+      .use(require.resolve('terser-webpack-plugin'));
   }
 );
 

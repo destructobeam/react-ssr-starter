@@ -93,7 +93,13 @@ config.when(
     config
       .entry('client.modern')
       .add('./src/client.js')
-      .end();
+      .end()
+
+      .optimization.minimize(true)
+      .minimizer('js')
+      .use(
+        require.resolve('terser-webpack-plugin', [{ ecma: 8, safari10: true }])
+      );
   }
 );
 
