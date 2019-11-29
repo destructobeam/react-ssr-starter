@@ -11,7 +11,7 @@
     "watch:clients": "node webpack/watch_clients.js",
     "watch:server": "node webpack/watch_server.js",
     "build": "NODE_ENV=production node webpack/build.js",
-    "start": "NODE_ENV=production node build/server.cjs",
+    "start": "NODE_ENV=production node build/server.js",
     "test": "NODE_ENV=test jest"
   },
   "dependencies": {
@@ -53,6 +53,7 @@
     "size-plugin": "^1.1",
     "source-map-support": "^0.5",
     "start-server-webpack-plugin": "^2.2",
+    "terser-webpack-plugin": "^2.2.1",
     "webpack": "^4.27",
     "webpack-chain": "^6.0",
     "webpack-dev-server": "^3.1",
