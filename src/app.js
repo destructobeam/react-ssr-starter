@@ -1,5 +1,8 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import loadable from '@loadable/component';
+
+const AsyncText = loadable(() => import('components/async'));
 
 const App = () => (
   <>
@@ -10,6 +13,8 @@ const App = () => (
     </Helmet>
 
     <h1>React SSR Starter</h1>
+
+    <AsyncText />
   </>
 );
 

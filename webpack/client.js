@@ -9,8 +9,14 @@ const LoadablePlugin = require('@loadable/webpack-plugin');
 const SizePlugin = require('size-plugin');
 const WebpackBar = require('webpackbar');
 
+const { alias } = require('./common');
+
 let config = {
   name: 'client',
+
+  resolve: {
+    alias,
+  },
 
   output: {
     path: path.resolve(__dirname, '..', 'public', 'assets'),

@@ -10,9 +10,15 @@ const NodeExternals = require('webpack-node-externals');
 const StartServerPlugin = require('start-server-webpack-plugin');
 const WebpackBar = require('webpackbar');
 
+const { alias } = require('./common');
+
 let config = {
   name: 'server',
   target: 'node',
+
+  resolve: {
+    alias,
+  },
 
   output: {
     path: path.resolve(__dirname, '..', 'build'),
