@@ -1,31 +1,27 @@
 const render = async (context, next) => {
+  console.log('Render down');
+
   await next();
 
   console.log('Render up');
 
-  const {
-    state: {
-      assetManifest,
-      chunkExtractor,
-      helmet: { bodyAttributes, htmlAttributes, link, meta, title },
-      reactString,
-    },
-  } = context;
+  const { chunk_extractor, helmet, react_string } = context.state;
 
   context.body = `
     <!doctype html>
-    <html ${htmlAttributes.toString()}>
+    <html ${helmet.htmlAttributes.toString()}>
     <head>
-      <title>SSR Starter</title>
-      ${title.toString()}
-      ${meta.toString()}
-      ${link.toString()}
+      ${helmet.base.toString()}
+      ${helmet.title.toString()}
+      ${helmet.meta.toString()}
+      ${helmet.link.toString()}
 
-      ${chunkExtractor.getLinkTags()}
-      ${chunkExtractor.getScriptTags()}
+      ${chunk_extractor.getLinkTags()}
+      ${chunk_extractor.getScriptTags()}
     </head>
-    <body ${bodyAttributes.toString()}>
-      <div id="main" role="main">${reactString}</div>
+    <body ${helmet.bodyAttributes.toString()}>
+      ${helmet.noscript.toString()}
+      <div id="main" role="main">${react_string}</div>
     </body>
     </html>
   `;

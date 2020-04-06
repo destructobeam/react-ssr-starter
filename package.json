@@ -17,11 +17,9 @@
     "emotion-server": "^10.0",
     "koa": "^2.6",
     "koa-static": "^5.0",
-    "react": "^16.6",
-    "react-dom": "^16.6",
-    "react-helmet": "^5.2",
-    "react-router": "^4.3",
-    "react-router-dom": "^4.3",
+    "react": "^16.13",
+    "react-dom": "^16.13",
+    "react-helmet-async": "^1.0.4",
     "source-map-support": "^0.5"
   },
   "devDependencies": {

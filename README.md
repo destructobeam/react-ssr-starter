@@ -9,8 +9,7 @@ Includes Webpack hot reloading for server and client apps.
 ## Client
 
 - React
-- React Router
-- React Helmet
+- React Helmet Async
 
 ## Server
 

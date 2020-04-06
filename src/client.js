@@ -1,14 +1,14 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 import { loadableReady } from '@loadable/component';
+import { HelmetProvider } from 'react-helmet-async';
 import { hydrate } from 'react-dom';
 
 import App from './app';
 
 const Client = () => (
-  <Router>
+  <HelmetProvider>
     <App />
-  </Router>
+  </HelmetProvider>
 );
 
 loadableReady(() => {

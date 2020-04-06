@@ -6,15 +6,9 @@ const redirect = async (context, next) => {
     context.body = '';
   }
 
-  context.state.reactRouterContext = {};
-
   await next();
 
   console.log('Redirect up', context.state.reactRouterContext);
-
-  if (context.state.reactRouterContext.url) {
-    context.redirect(context.state.reactRouterContext.url);
-  }
 };
 
 export default redirect;

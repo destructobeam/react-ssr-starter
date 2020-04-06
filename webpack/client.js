@@ -39,7 +39,6 @@ let config = {
             plugins: [
               '@babel/plugin-syntax-dynamic-import',
               '@loadable/babel-plugin',
-              'babel-plugin-emotion',
             ],
           },
         },
